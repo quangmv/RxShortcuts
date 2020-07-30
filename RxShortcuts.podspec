@@ -12,17 +12,17 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/sunshinejr/RxShortcuts.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/thesunshinejr'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '13.0'
   s.default_subspec = "Core"
 
   s.subspec "Core" do |ss|
     ss.source_files = "RxShortcuts/RxSwift/*.swift"
-    ss.dependency "RxSwift", "~> 3.0"
+    ss.dependency "RxSwift", "~> 5.1.1"
   end
 
   s.subspec "RxCocoa" do |ss|
     ss.source_files = "RxShortcuts/RxCocoa/*.swift"
     ss.dependency "RxShortcuts/Core"
-    ss.dependency "RxCocoa", "~> 3.0"
+    ss.dependency "RxCocoa", "~> 5.1.1"
   end
 end
