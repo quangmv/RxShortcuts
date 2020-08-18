@@ -18,7 +18,7 @@ public extension SharedSequenceConvertibleType where SharingStrategy == DriverSh
      - returns: The source sequence with the side-effecting behavior applied.
      */
     // @warn_unused_result(message:"http://git.io/rxs.uo")
-    public func doOnNext(_ onNext: @escaping (E) -> Void) -> Driver<E> {
+    func doOnNext(_ onNext: @escaping (Element) -> Void) -> Driver<Element> {
         return self.do(onNext: onNext)
     }
     
@@ -29,7 +29,7 @@ public extension SharedSequenceConvertibleType where SharingStrategy == DriverSh
      - returns: The source sequence with the side-effecting behavior applied.
      */
     // @warn_unused_result(message:"http://git.io/rxs.uo")
-    public func doOnCompleted(_ onCompleted: @escaping () -> Void) -> Driver<E> {
+    func doOnCompleted(_ onCompleted: @escaping () -> Void) -> Driver<Element> {
         return self.do(onCompleted: onCompleted)
     }
     
@@ -40,7 +40,7 @@ public extension SharedSequenceConvertibleType where SharingStrategy == DriverSh
      - returns: Subscription object used to unsubscribe from the observable sequence.
      */
     // @warn_unused_result(message: "http://git.io/rxs.ud")
-    public func driveNext(_ onNext: @escaping (E) -> Void) -> Disposable {
+    func driveNext(_ onNext: @escaping (Element) -> Void) -> Disposable {
         return self.drive(onNext: onNext)
     }
     
@@ -51,7 +51,7 @@ public extension SharedSequenceConvertibleType where SharingStrategy == DriverSh
      - returns: Subscription object used to unsubscribe from the observable sequence.
      */
     // @warn_unused_result(message: "http://git.io/rxs.ud")
-    public func driveCompleted(_ onCompleted: @escaping () -> Void) -> Disposable {
+    func driveCompleted(_ onCompleted: @escaping () -> Void) -> Disposable {
         return self.drive(onCompleted: onCompleted)
     }
 }

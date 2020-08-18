@@ -6,17 +6,16 @@
 //  Copyright (c) 2016 sunshinejr. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
 import RxShortcuts
+import RxSwift
+import UIKit
 
 enum TestError: Error {
     case test
 }
 
 class ViewController: UIViewController {
-
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -36,16 +35,16 @@ class ViewController: UIViewController {
             .driveNext { number in
                 print("driveNext: \(number)")
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         driverSequence
             .doOnCompleted {
                 print("driver doOnCompleted")
             }
-            .driveCompleted { _ in
+            .driveCompleted {
                 print("driveCompleted")
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         sequence
             .doOnNext { number in
@@ -54,32 +53,24 @@ class ViewController: UIViewController {
             .subscribeNext { number in
                 print("subscribeNext: \(number)")
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         sequence
             .doOnCompleted {
                 print("doOnCompleted")
             }
-            .subscribeCompleted { _ in
+            .subscribeCompleted {
                 print("subscribeCompleted")
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         errorSequence
             .doOnError { error in
                 print("doOnError: \(error)")
             }
-            .subscribeError { error in
+            .subscribeError { _ in
                 print("subscribeError")
             }
-            .addDisposableTo(disposeBag)
-        
-        // Collection shortcuts
-        // ====================
-        let collectionSequence = [Observable.just(1), Observable.just(2)]
-        let mergeSequence = collectionSequence.merge()
-        let concatSequence = collectionSequence.concat()
-        let zipSequence = collectionSequence.zip { $0 }
-        let combineSequence = collectionSequence.combineLatest { $0 }
+            .disposed(by: disposeBag)
     }
 }

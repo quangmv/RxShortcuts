@@ -17,7 +17,7 @@ public extension ObservableType {
      - returns: The source sequence with the side-effecting behavior applied.
      */
     // @warn_unused_result(message:"http://git.io/rxs.uo")
-    public func doOnNext(_ onNext: @escaping (E) throws -> Void) -> Observable<E> {
+    func doOnNext(_ onNext: @escaping (Element) throws -> Void) -> Observable<Element> {
         return self.do(onNext: onNext)
     }
     
@@ -28,7 +28,7 @@ public extension ObservableType {
      - returns: The source sequence with the side-effecting behavior applied.
      */
     // @warn_unused_result(message:"http://git.io/rxs.uo")
-    public func doOnError(_ onError: @escaping (Swift.Error) throws -> Void) -> Observable<E> {
+    func doOnError(_ onError: @escaping (Swift.Error) throws -> Void) -> Observable<Element> {
         return self.do(onError: onError)
     }
     
@@ -39,7 +39,7 @@ public extension ObservableType {
      - returns: The source sequence with the side-effecting behavior applied.
      */
     // @warn_unused_result(message:"http://git.io/rxs.uo")
-    public func doOnCompleted(_ onCompleted: @escaping () throws -> Void) -> Observable<E> {
+    func doOnCompleted(_ onCompleted: @escaping () throws -> Void) -> Observable<Element> {
         return self.do(onCompleted: onCompleted)
     }
     
@@ -50,7 +50,7 @@ public extension ObservableType {
      - returns: Subscription object used to unsubscribe from the observable sequence.
      */
     // @warn_unused_result(message: "http://git.io/rxs.ud")
-    public func subscribeNext(_ onNext: @escaping (E) -> Void) -> Disposable {
+    func subscribeNext(_ onNext: @escaping (Element) -> Void) -> Disposable {
         return self.subscribe(onNext: onNext)
     }
     
@@ -61,7 +61,7 @@ public extension ObservableType {
      - returns: Subscription object used to unsubscribe from the observable sequence.
      */
     // @warn_unused_result(message: "http://git.io/rxs.ud")
-    public func subscribeError(_ onError: @escaping (Swift.Error) -> Void) -> Disposable {
+    func subscribeError(_ onError: @escaping (Swift.Error) -> Void) -> Disposable {
         return self.subscribe(onError: onError)
     }
     
@@ -72,7 +72,7 @@ public extension ObservableType {
      - returns: Subscription object used to unsubscribe from the observable sequence.
      */
     // @warn_unused_result(message: "http://git.io/rxs.ud")
-    public func subscribeCompleted(_ onCompleted: @escaping () -> Void) -> Disposable {
+    func subscribeCompleted(_ onCompleted: @escaping () -> Void) -> Disposable {
         return self.subscribe(onCompleted: onCompleted)
     }
 }
